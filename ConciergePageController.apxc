@@ -1,0 +1,25 @@
+public class ConciergePageController {
+    // Property to hold service requests
+    public List<Service_Request__c> serviceRequests { get set }
+    
+    // Property to hold selected service request ID
+    public Id selectedServiceRequestId { get set }
+    
+    // Constructor to initialize the data
+    public ConciergePageController() {
+        // Fetch service requests assigned to the current user
+        Id currentUserId = UserInfo.getUserId()
+        serviceRequests = [SELECT Id, Name, Request_Type__c, Details__c, Closed_Date__c, Status__c,Priority__c, Reservation_ID__c, Resolution_Details__c
+                           FROM Service_Request__c
+                           WHERE Assigned_to__c = currentUserId
+                           LIMIT 10]
+    }
+    
+    // Method to handle the service request edit redirection
+    public PageReference editServiceRequest() {
+        PageReference editPage = new PageReference('/' + selectedServiceRequestId + '/e')
+        editPage.setRedirect(true)
+        return editPage
+    }
+    
+}
