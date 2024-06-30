@@ -1,0 +1,23 @@
+<apexpage controller="ConciergePageController">
+    <apexsectionHeader title="Concierge Page" subtitle="Displaying Service Requests" />
+    
+    <apexform >
+        <apexpageBlock title="Service Requests">
+            <apexpageBlockTable value="{!serviceRequests}" var="serviceRequest" style="background-colorlightblue">
+                <apexcolumn value="{!serviceRequest.Name}" headerValue="Name" />
+                <apexcolumn value="{!serviceRequest.Request_Type__c}" headerValue="Request Type" />
+                <apexcolumn value="{!serviceRequest.Priority__c}" headerValue="Priority" />
+                <apexcolumn value="{!serviceRequest.Details__c}" headerValue="Details" />
+                <apexcolumn value="{!serviceRequest.Reservation_ID__c}" headerValue="Reservation ID" />
+                <apexcolumn value="{!serviceRequest.Status__c}" headerValue="Status" />
+                <apexcolumn value="{!serviceRequest.Closed_Date__c}" headerValue="Closed Date" />
+                <apexcolumn value="{!serviceRequest.Resolution_Details__c}" headerValue="Resolution Details" />
+                <apexcolumn headerValue="Actions">
+                    <apexcommandButton value="Edit" action="{!editServiceRequest}" reRender="none">
+                        <apexparam name="serviceRequestId" value="{!serviceRequest.Id}" assignTo="{!selectedServiceRequestId}" />
+                    </apexcommandButton>
+                </apexcolumn>
+            </apexpageBlockTable>
+        </apexpageBlock>
+    </apexform>
+</apexpage>
